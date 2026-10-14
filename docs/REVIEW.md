@@ -1,7 +1,8 @@
 # Redesign para revisão
 
-Branch: `feature/github-profile-redesign`. A `main` continua no commit
-`7436037e63f0f491b02b03b2feb76c8088b36208`, sem publicação do redesign.
+Desenvolvido na branch `feature/github-profile-redesign`, a partir do commit
+`7436037e63f0f491b02b03b2feb76c8088b36208`. A integração na `main` foi autorizada
+por Pedro após a revisão.
 
 ## Previews
 
@@ -56,10 +57,9 @@ usa o mesmo ambiente Ubuntu com Pillow fixado. SVG e dados permaneceram idêntic
 
 ## Pendências
 
-1. Aprovação visual e autorização explícita para integrar na `main`.
-2. Envio dos novos links de contato, conforme combinado.
+1. Envio dos novos links de contato, conforme combinado.
 
-O cron diário só passa a executar o novo workflow quando ele estiver na branch
-padrão. Até a aprovação, o perfil público continua com a versão anterior.
+O cron diário executa o workflow na branch padrão. O perfil público exibe o
+README da `main`.
 
 Detalhes de geração e permissões: [ANIMATIONS.md](./ANIMATIONS.md).

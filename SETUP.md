@@ -1,12 +1,12 @@
 # Perfil PedroYuri14
 
-O redesign está na branch `feature/github-profile-redesign`, aguardando aprovação
-para integração na `main`. Abra o README dessa branch para revisar as animações.
+O perfil utiliza uma IDE Java animada e uma Commit City baseada em contribuições
+reais. O README da `main` é exibido no perfil público do GitHub.
 
 As instruções de geração, testes, permissões, fontes e fallbacks estão em
 [docs/ANIMATIONS.md](./docs/ANIMATIONS.md).
 
-Após o merge aprovado, abra **Actions → Atualizar Commit City → Run workflow**.
+Para atualizar a cidade manualmente, abra **Actions → Atualizar Commit City → Run workflow**.
 A atualização diária está agendada para 05:23 UTC. O workflow usa `GITHUB_TOKEN`
 e a permissão `contents: write`; não adicione credenciais ao código.
 

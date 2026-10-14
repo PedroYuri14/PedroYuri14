@@ -1,7 +1,7 @@
 # Animações do perfil
 
-O redesign fica em `feature/github-profile-redesign`. A publicação na `main`
-depende da aprovação de Pedro. O perfil público continua usando a `main` até o merge.
+O perfil público utiliza o README da `main`. O redesign foi desenvolvido e
+validado em `feature/github-profile-redesign`, com integração autorizada por Pedro.
 
 ## Animated Java IDE
 
@@ -148,4 +148,4 @@ Previews: `assets/animated-java-ide-preview.png`, `assets/animated-java-ide-runn
 e `assets/commit-city-preview.png`. Os GIFs podem ser vistos no README da branch.
 
 As tecnologias foram mantidas conforme solicitado, sem reclassificar domínio.
-Novos contatos aguardam os links aprovados. O merge na `main` aguarda aprovação.
+Novos contatos aguardam os links aprovados.

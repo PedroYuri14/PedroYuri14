@@ -1,0 +1,34 @@
+name: Atualizar Pokémon Commit Map
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-map:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Gerar mapa de contribuições
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_USERNAME: PedroYuri14
+        run: python scripts/generate_commit_map.py
+      - name: Publicar alterações
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/commit-map.svg
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: atualizar mapa de contribuições"
+            git push
+          fi

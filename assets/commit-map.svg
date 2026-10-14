@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 330" role="img" aria-label="Mapa de contribuições: aguardando atualização">
+<rect width="1120" height="330" rx="22" fill="#0c1223"/>
+<rect x="16" y="16" width="1088" height="298" rx="16" fill="#111d2e" stroke="#34485b"/>
+<text x="36" y="55" fill="#e6f3ff" font-size="24" font-family="Arial,sans-serif" font-weight="bold">POKÉMON COMMIT MAP</text>
+<text x="36" y="130" fill="#a8d3c1" font-size="22" font-family="Arial,sans-serif">Aguardando primeira execução do GitHub Actions</text>
+<text x="36" y="168" fill="#90a7b8" font-size="17" font-family="Arial,sans-serif">Abra Actions → Atualizar Pokémon Commit Map → Run workflow</text>
+<text x="36" y="210" fill="#90a7b8" font-size="16" font-family="Arial,sans-serif">O mapa será preenchido com contribuições reais da sua conta.</text>
+</svg>

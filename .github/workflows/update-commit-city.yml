@@ -57,6 +57,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PROFILE_READ_TOKEN || github.token }}
           PROFILE_USERNAME: PedroYuri14
         run: python scripts/generate_commit_city.py
+      - name: Confirmar geração sem alterações desnecessárias
+        run: |
+          sha256sum assets/commit-city.svg assets/commit-city.gif assets/commit-city-preview.png assets/commit-city-data.json > "$RUNNER_TEMP/commit-city.sha256"
+          python scripts/generate_commit_city.py --input assets/commit-city-data.json
+          sha256sum --check "$RUNNER_TEMP/commit-city.sha256"
       - name: Validar assets e referências
         run: python scripts/validate_assets.py
       - name: Publicar somente assets modificados

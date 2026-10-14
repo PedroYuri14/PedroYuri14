@@ -1,14 +1,18 @@
 <div align="center">
 
-<img src="./assets/pokemon-walk.svg" alt="Charmander, Gengar e Pikachu caminhando em um cenário pixel art" width="100%" />
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="./assets/animated-java-ide-preview.png" />
+  <source media="(max-width: 600px)" srcset="./assets/animated-java-ide-mobile.gif" />
+  <img src="./assets/animated-java-ide.gif" alt="IDE Java: Developer.java sendo digitado, compilado e executado com sucesso" width="100%" />
+</picture>
 
 # Olá, eu sou Pedro Yuri! 👋
 
-**Engenharia de Software · Backend · Produtos digitais**
+**Engenharia de Software · Backend · IA aplicada**
 
 Construo aplicações, automações e produtos que transformam ideias em software.
 
-[![GitHub](https://img.shields.io/badge/GitHub-PedroYuri14-181717?style=for-the-badge&logo=github)](https://github.com/PedroYuri14)
+<sub><a href="./assets/animated-java-ide-preview.png">Ver banner estático</a> · <a href="./animations/java-ide/src/dev/pedroyuri/Developer.java">Código Java do banner</a></sub>
 
 </div>
 
@@ -75,22 +79,31 @@ Construo aplicações, automações e produtos que transformam ideias em softwar
 | **PetMerce** | Sistema de gestão para pet shops, com estoque, clientes, pets e serviços. | ERP · Full stack |
 | **Integrador Hiper** | Automação de processos de implantação com Playwright. | Automação · Integrações |
 
-> Adicione links dos repositórios quando estiverem públicos. Não são publicados links fictícios.
+<sub>Os links dos projetos serão adicionados quando os repositórios estiverem públicos.</sub>
 
-## 🗺️ Pokémon Commit Map
-
-<div align="center">
-<img src="./assets/commit-map.svg" alt="Mapa Pokémon de contribuições do GitHub" width="100%" />
-
-<sub>Mapa atualizado automaticamente pelo GitHub Actions. Cada bloco corresponde a um dia; terrenos mais intensos representam mais contribuições.</sub>
-</div>
-
----
+## Commit City 3D
 
 <div align="center">
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="./assets/commit-city.svg" />
+  <img src="./assets/commit-city.gif" alt="Cidade isométrica dos últimos 365 dias: terrenos vazios para dias sem atividade e edifícios proporcionais às contribuições reais" width="100%" />
+</picture>
 
-**Obrigado pela visita!** ✨
-
-<img src="./assets/pokemon-walk.svg" alt="Pokémon pixel art animados" width="70%" />
-
+<sub>Um terreno por dia. A altura de cada edifício representa contribuições reais do GitHub, incluindo commits e outras atividades contabilizadas no perfil.</sub>
 </div>
+
+| Contribuições no dia | Edifício |
+|---|---|
+| 0 | Terreno vazio |
+| 1–2 | Construção pequena |
+| 3–5 | Edifício médio |
+| 6–9 | Edifício alto |
+| 10+ | Arranha-céu |
+
+[Ver cidade estática](./assets/commit-city.svg) · [Dados do calendário](./assets/commit-city-data.json)
+
+<sub>Atualização diária via GitHub Actions. Os dias seguem a ordem cronológica por fileira; o período consultado aparece na imagem.</sub>
+
+## Contatos
+
+[![GitHub](https://img.shields.io/badge/GitHub-PedroYuri14-181717?style=for-the-badge&logo=github)](https://github.com/PedroYuri14)

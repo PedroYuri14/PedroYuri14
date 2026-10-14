@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1600, height=900">
+  <script src="vendor/gsap.min.js"></script>
+  <style>
+    @font-face{font-family:JetBrains;src:url('assets/JetBrainsMono-Regular.ttf')}
+    *{box-sizing:border-box;margin:0}
+    html,body{width:1600px;height:900px;overflow:hidden;background:#0D1117;color:#E6EDF3}
+    body{font-family:JetBrains,monospace;font-variant-ligatures:none}
+    #root{width:100%;height:100%;padding:36px 52px;display:flex;flex-direction:column;justify-content:center}
+    #ide{width:100%;height:100%;display:flex;flex-direction:column;border:1px solid #30363D;border-radius:16px;overflow:hidden;background:#161B22;box-shadow:0 16px 30px #090D13;transform-origin:center}
+    .topbar{height:58px;flex-shrink:0;display:flex;align-items:center;gap:24px;padding:0 23px;background:#161B22;border-bottom:1px solid #30363D;font-size:20px}
+    .brand{background:#BC8CFF;color:#0D1117;width:30px;height:30px;display:grid;place-items:center;border-radius:7px;font-size:17px;font-weight:bold}
+    .project-name{color:#E6EDF3}.crumb{color:#A7B3C2;font-size:17px}
+    .build-state{margin-left:auto;display:flex;gap:10px;align-items:center;color:#A7B3C2;font-size:17px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#58A6FF}.run{color:#3FB950;padding-left:28px;font-size:26px}
+    .window-controls{font-size:21px;letter-spacing:14px;color:#A7B3C2;margin-left:18px}
+    .workspace{flex:1;min-height:0;display:flex}
+    .rail{width:49px;flex-shrink:0;border-right:1px solid #30363D;display:flex;flex-direction:column;align-items:center;gap:27px;padding-top:20px;color:#A7B3C2;font-size:22px}
+    .rail .active{color:#58A6FF}
+    #explorer{width:220px;flex-shrink:0;border-right:1px solid #30363D;padding:23px 13px;background:#131920;overflow:hidden}
+    .explorer-heading{color:#A7B3C2;font-size:16px;letter-spacing:1px;margin-bottom:29px}
+    .tree{font-size:17px;line-height:38px;white-space:nowrap}.folder{color:#A7B3C2}.indent{padding-left:18px}
+    #selected-file{background:#1F3550;border-radius:5px;margin:3px 0;padding-left:12px;color:#E6EDF3;line-height:36px}
+    .file-mark{font-size:14px;color:#58A6FF;padding-right:7px}.tree .quiet{color:#A7B3C2;font-size:16px}
+    .editor{flex:1;min-width:0;display:flex;flex-direction:column;background:#0D1117}
+    .tabs{height:48px;flex-shrink:0;display:flex;align-items:stretch;background:#161B22;border-bottom:1px solid #30363D;font-size:17px}
+    .tab{display:flex;align-items:center;gap:14px;padding:0 24px;background:#0D1117;border-top:2px solid #58A6FF}
+    .tab .cross{color:#A7B3C2;padding-left:18px}.editor-path{margin-left:auto;align-self:center;margin-right:23px;font-size:15px;color:#A7B3C2}
+    #viewport{flex:1;min-height:0;overflow:hidden;padding:17px 0 17px 20px}
+    #code-block{position:relative;font-size:27px;line-height:35px;white-space:pre;font-variant-ligatures:none}
+    .code-line{height:35px;display:flex;align-items:center}
+    .line-number{width:48px;flex-shrink:0;text-align:right;margin-right:30px;color:#A7B3C2;font-size:19px;user-select:none}
+    .line-content{position:relative;white-space:pre;display:inline-block;height:35px}
+    .glyph{white-space:pre}.keyword{color:#BC8CFF}.type{color:#58A6FF}.string{color:#72CB83}.method{color:#E6EDF3}.punct{color:#A7B3C2}
+    #cursor{position:absolute;left:78px;top:3px;width:2px;height:29px;background:#58A6FF;z-index:3}
+    #terminal{height:0;flex-shrink:0;overflow:hidden;border-top:1px solid #30363D;background:#11171E}
+    .terminal-tabs{height:35px;display:flex;align-items:center;gap:25px;padding:0 25px;color:#A7B3C2;font-size:15px}
+    .terminal-tabs .active{color:#E6EDF3}.terminal-text{padding:0 25px;line-height:27px;font-size:21px;white-space:pre}
+    .prompt{color:#58A6FF}.output{color:#E6EDF3}.success{color:#72CB83}
+    #success-badge{color:#72CB83;font-size:16px;margin-left:auto;display:flex;align-items:center;gap:9px}
+    .statusbar{height:29px;flex-shrink:0;background:#161B22;border-top:1px solid #30363D;display:flex;align-items:center;gap:30px;padding:0 20px;font-size:14px;color:#A7B3C2}
+    .statusbar .branch{color:#58A6FF}.statusbar .right{margin-left:auto;display:flex;gap:24px}
+  </style>
+</head>
+<body>
+<main id="root" data-composition-id="java-ide" data-start="0" data-duration="15" data-width="1600" data-height="900">
+  <section id="ide">
+    <header class="topbar">
+      <span class="brand">IJ</span><span class="project-name">PedroYuri14</span><span class="crumb">/ backend-workspace</span>
+      <span class="build-state"><span class="dot"></span><span id="build-label">Ready</span></span>
+      <span class="run">▷</span><span class="window-controls">− □ ×</span>
+    </header>
+    <div class="workspace">
+      <nav class="rail"><span class="active">▤</span><span>⌕</span><span>⑂</span><span>▣</span></nav>
+      <aside id="explorer">
+        <div class="explorer-heading">PROJECT</div>
+        <div class="tree"><div>⌄ PedroYuri14</div><div class="indent folder">⌄ src</div><div class="indent"><div class="indent folder">⌄ dev.pedroyuri</div></div>
+          <div id="selected-file"><span class="file-mark">J</span>Developer.java</div>
+          <div class="quiet">› out</div><div class="quiet">› .git</div><div class="quiet">· README.md</div>
+        </div>
+      </aside>
+      <div class="editor">
+        <div class="tabs"><div class="tab"><span class="file-mark">J</span>Developer.java<span class="cross">×</span></div><span class="editor-path">src / dev / pedroyuri</span></div>
+        <div id="viewport" data-layout-allow-occlusion><div id="code-block" data-layout-allow-overflow><div id="cursor" data-layout-ignore></div></div></div>
+        <div id="terminal">
+          <div class="terminal-tabs"><span class="active">Terminal</span><span>Build</span><span>Run</span><span id="success-badge">✓ Build successful</span></div>
+          <div class="terminal-text" data-layout-allow-overflow><div id="command-compile"><span class="prompt">$ </span>javac -d out src/dev/pedroyuri/Developer.java</div><div id="command-run"><span class="prompt">$ </span>java -cp out dev.pedroyuri.Developer</div><div id="program-output" class="output">Turning ideas into code.</div><div id="process-exit" class="success">Process finished with exit code 0</div></div>
+        </div>
+      </div>
+    </div>
+    <footer class="statusbar"><span class="branch">⑂ main</span><span>Developer.java</span><span class="right"><span>UTF-8</span><span>4 spaces</span><span>Java 21</span></span></footer>
+  </section>
+</main>
+<pre id="java-source" hidden>package dev.pedroyuri;
+
+public class Developer {
+
+    private final String name = "Pedro Yuri";
+    private final String role = "Software Engineer";
+
+    public void build() {
+        System.out.println("Turning ideas into code.");
+    }
+
+    public static void main(String[] args) {
+        new Developer().build();
+    }
+}</pre>
+<script>
+  const source = document.getElementById('java-source').textContent;
+  window.__JAVA_SOURCE = source;
+  const block = document.getElementById('code-block');
+  const lines = source.split('\n');
+  const characters = [];
+  const keywords = new Set(['package','public','class','private','final','void','static','new']);
+  let offset=0, weight=0;
+  lines.forEach((line,row)=>{
+    const wrap=document.createElement('div'); wrap.className='code-line';
+    const number=document.createElement('span');number.className='line-number';number.textContent=row+1;wrap.appendChild(number);
+    if(row<2) number.setAttribute('data-layout-allow-occlusion','true'); // These rows intentionally scroll behind the editor's top edge.
+    const content=document.createElement('span');content.className='line-content';wrap.appendChild(content);block.appendChild(wrap);
+    const tokens=line.match(/"[^"\n]*"|[A-Za-z_][A-Za-z_0-9]*|[^A-Za-z_]/g)||[];
+    let column=0;
+    for(const token of tokens){
+      const style=token.startsWith('"')?'string':keywords.has(token)?'keyword':/^(String|System|Developer)$/.test(token)?'type':/^[{}();\[\].=]$/.test(token)?'punct':'method';
+      for(const char of token){
+        const glyph=document.createElement('span');glyph.className='glyph '+style;glyph.textContent=char;content.appendChild(glyph);
+        if(row<2) glyph.setAttribute('data-layout-allow-occlusion','true');
+        weight+=char===' '?0.32:/[;{}]/.test(char)?2.1:1;
+        characters.push({glyph,row,column,weight,offset:offset++});column++;
+      }
+    }
+    weight+=5;offset++;
+  });
+  const tl=gsap.timeline({paused:true});
+  window.__timelines=window.__timelines||{};
+  window.__timelines['java-ide']=tl;
+  tl.from('#ide',{opacity:0,y:12,scale:.985,duration:.8,ease:'power2.out'},0);
+  tl.from('#explorer',{opacity:0,x:-10,duration:.5,ease:'power2.out'},.7);
+  tl.from('#selected-file',{opacity:0,duration:.4},1.15);
+  characters.forEach(char=>tl.from(char.glyph,{opacity:0,duration:.025,ease:'none'},2+7*char.weight/weight));
+  tl.from('#cursor',{opacity:0,duration:.1},1.7);
+  tl.to('#terminal',{height:158,duration:.55,ease:'power2.inOut'},9);
+  tl.from('.terminal-tabs',{opacity:0,duration:.2},9.45);
+  tl.to('#code-block',{y:-82,duration:.55,ease:'power2.inOut'},9);
+  tl.from('#command-compile',{opacity:0,y:5,duration:.25},9.45);
+  tl.from('#command-run',{opacity:0,y:5,duration:.25},10.15);
+  tl.from('#program-output',{opacity:0,y:5,duration:.25},10.8);
+  tl.from('#process-exit',{opacity:0,duration:.35},11.2);
+  tl.from('#success-badge',{opacity:0,duration:.4},11.45);
+  tl.to('#ide',{scale:.985,duration:1.4,ease:'sine.inOut'},12.2);
+  tl.to('#ide',{opacity:0,duration:.7,ease:'sine.inOut'},14.3);
+  const cursor=document.getElementById('cursor');
+  const label=document.getElementById('build-label');
+  function updateState(){
+    const time=tl.time();
+    let last=null;
+    for(const char of characters){if(2+7*char.weight/weight<=time)last=char;else break;}
+    if(last){cursor.style.left=(81+(last.column+1)*16.2)+'px';cursor.style.top=(3+last.row*35)+'px';}
+    else{cursor.style.left='78px';cursor.style.top='3px';}
+    cursor.style.visibility=Math.floor(time*2)%2===0?'visible':'hidden';
+    label.textContent=time>=11.45?'Build successful':time>=10.15?'Running…':time>=9?'Compiling…':time>=2?'Editing':'Ready';
+    label.style.color=time>=11.45?'#72CB83':'#A7B3C2';
+  }
+  tl.eventCallback('onUpdate',updateState);
+  tl.seek(0);updateState();
+  window.__seek=(time)=>{tl.seek(time,false);updateState();};
+</script>
+</body>
+</html>

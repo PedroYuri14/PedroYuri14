@@ -1,0 +1,70 @@
+name: Atualizar Commit City
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * *'
+  # Validates this new workflow before approval to merge it into main.
+  # Generated assets are excluded, so bot commits never start a new run.
+  push:
+    branches: [feature/github-profile-redesign]
+    paths:
+      - '.github/workflows/update-commit-city.yml'
+      - 'scripts/generate_commit_city.py'
+      - 'scripts/commit-city-config.json'
+      - 'scripts/requirements.txt'
+      - 'tests/**'
+      - 'animations/java-ide/src/**'
+      - 'assets/fonts/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: commit-city-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update-city:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+      - name: Dependências
+        run: python -m pip install -r scripts/requirements.txt
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compilar e executar o Java do banner
+        working-directory: animations/java-ide
+        run: |
+          javac -d out src/dev/pedroyuri/Developer.java
+          result=$(java -cp out dev.pedroyuri.Developer)
+          test "$result" = "Turning ideas into code."
+      - name: Testes do gerador
+        run: python -m unittest discover -s tests -v
+      - name: Gerar cidade com contribuições reais
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_READ_TOKEN || github.token }}
+          PROFILE_USERNAME: PedroYuri14
+        run: python scripts/generate_commit_city.py
+      - name: Validar assets e referências
+        run: python scripts/validate_assets.py
+      - name: Publicar somente assets modificados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/commit-city.svg assets/commit-city.gif assets/commit-city-preview.png assets/commit-city-data.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(profile): atualizar Commit City [skip ci]"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

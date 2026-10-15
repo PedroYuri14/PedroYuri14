@@ -2,14 +2,10 @@
   "schema": 1,
   "source": "GitHub GraphQL contributionCalendar",
   "username": "PedroYuri14",
-  "from": "2025-10-15",
-  "to": "2026-10-14",
-  "total": 5,
+  "from": "2025-10-16",
+  "to": "2026-10-15",
+  "total": 6,
   "days": [
-    {
-      "date": "2025-10-15",
-      "count": 0
-    },
     {
       "date": "2025-10-16",
       "count": 0
@@ -1464,7 +1460,11 @@
     },
     {
       "date": "2026-10-14",
-      "count": 3
+      "count": 4
+    },
+    {
+      "date": "2026-10-15",
+      "count": 0
     }
   ]
 }
